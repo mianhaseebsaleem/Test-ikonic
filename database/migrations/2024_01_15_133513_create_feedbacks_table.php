@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->enum('category', ['bug report', 'feature request', 'improvement']);
+            $table->integer('parent_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }
