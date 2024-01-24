@@ -23,6 +23,7 @@ class FeedbackController extends Controller
             'title' => 'required|string',
             'description' => 'required|string',
             'category' => 'required|in:bug report,feature request,improvement',
+            'product_id' => 'required'
         ]);
 
         $feedback = Feedback::create($request->all());

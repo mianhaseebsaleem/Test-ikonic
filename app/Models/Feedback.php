@@ -12,11 +12,10 @@ class Feedback extends Model
 {
     use HasFactory;
     protected $table = 'feedbacks'; 
-    protected $fillable = ['title', 'description', 'category','user_id'];
+    protected $fillable = ['title', 'description', 'category','feedback_user_id','product_id'];
 
     protected $casts = [
         'category' => 'string', 
-        'user_id' => 'integer', //
     ];
 
      // Add any additional methods or relationships here
@@ -27,12 +26,12 @@ class Feedback extends Model
  
          static::creating(function ($feedback) {
              // Set the user_id attribute before creating the feedback
-             $feedback->user_id = Auth::id();
+             $feedback->feedback_user_id = Auth::id();
          });
      }
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'feedback_user_id');
     }
     public function comments()
     {

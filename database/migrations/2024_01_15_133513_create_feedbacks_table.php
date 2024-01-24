@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->unsignedBigInteger('product_id')->nullable();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('set null');
+            $table->unsignedBigInteger('feedback_user_id')->nullable();
+            $table->foreign('feedback_user_id')->references('id')->on('users')->onDelete('set null');
             $table->text('description');
             $table->enum('category', ['bug report', 'feature request', 'improvement']);
-            $table->integer('parent_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }
